@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/new'
   root 'static_pages#home'
 
   get 'help', to: 'static_pages#help' #as: 'helper' as选项用于创建别名:helper_path
