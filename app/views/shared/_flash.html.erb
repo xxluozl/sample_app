@@ -1,0 +1,7 @@
+<% if notice %>
+  <%= content_tag(:div, nl2br(notice), class: 'alert alert-success') %> <!-- 使用content_tag方法替换HTML代码 -->
+  <!--  <div class="alert alert-success"><%#= nl2br(notice) %></div>-->
+<% elsif alert %>
+  <%= content_tag(:div, nl2br(alert), class: 'alert alert-alert') %>
+  <!--  <div class="alert alert-alert"><%#= nl2br(alert) %></div>-->
+<% end %>
