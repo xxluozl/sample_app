@@ -28,6 +28,5 @@ class UsersSignUpTest < ActionDispatch::IntegrationTest
     end
     follow_redirect! #跟踪页面重定向
     assert_template 'users/show'
-    assert_select 'div#error_explanation'
   end
 end

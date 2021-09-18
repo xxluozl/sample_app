@@ -16,7 +16,10 @@ module SampleApp
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    # 时区设置成北京
+    config.time_zone = "Beijing"
+    # 保存到数据库的时间设为本地时间，默认是 :utc
+    config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
