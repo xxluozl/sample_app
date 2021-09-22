@@ -9,4 +9,11 @@ class User < ApplicationRecord
   # 1：创建password 和 password_confirmation两个虚拟属性，并会执行存在性验证和匹配验证
   # 2：在数据库中的 password_digest 字段存储安全的密码哈希值；所以要先向users表中添加该字段
   # 3：获得 authenticate 方法，如果密码正确，返回对应的用户对象，否则返回 false
+
+  # 返回指定字符串的哈希摘要
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+             BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end

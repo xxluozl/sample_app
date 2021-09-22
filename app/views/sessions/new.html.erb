@@ -1,0 +1,14 @@
+<%= content_for :title, '登录' %>
+
+<h1>登录</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+      <%= f.email_field :email, class: 'form-control', placeholder: '请输入邮件地址' %>
+      <%= f.password_field :password, class: 'form-control', placeholder: '请输入密码' %>
+      <%= f.submit "登录", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>没有账号? <%= link_to "马上注册!", sign_up_path %></p>
+  </div>
+</div>
