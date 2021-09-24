@@ -4,8 +4,9 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user&.authenticate(params[:session][:password])  # user&.method <=> user && user.method
+    if user&.authenticate(params[:session][:password]) # user&.method <=> user && user.method
       reset_session #重设会话，用于防止“会话固定”攻击，会话固定指攻击者诱导用户使用攻击者掌握的会话 ID，达到共用会话的目的
+      remember(user) if params[:session][:remember_me] == '1'
       log_in(user)
       redirect_to user_path(user), notice: '登录成功！'
     else
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_path
   end
 end

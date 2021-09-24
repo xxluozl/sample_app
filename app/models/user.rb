@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
   before_save { email.downcase! } #存入数据库前转为小写,使用爆炸方法实现回调，也可以用 self.email = email.downcase 实现回调
   validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }
@@ -15,5 +16,30 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
              BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  def self.new_token
+    SecureRandom.urlsafe_base64 # 返回一个随机令牌
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+    remember_digest
+  end
+
+  def authenticate?(remember_token)
+    return false if remember_digest.nil?
+    BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  # 返回一个会话令牌，防止会话劫持
+  # 简单起见，直接使用记忆令牌
+  def session_token
+    remember_digest || remember
   end
 end

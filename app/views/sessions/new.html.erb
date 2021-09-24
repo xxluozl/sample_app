@@ -6,6 +6,10 @@
     <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
       <%= f.email_field :email, class: 'form-control', placeholder: '请输入邮件地址' %>
       <%= f.password_field :password, class: 'form-control', placeholder: '请输入密码' %>
+      <%= f.label :remember_me, class: 'checkbox inline' do %>
+        <%= f.check_box :remember_me %>
+        <span>记住我</span>
+      <% end %>
       <%= f.submit "登录", class: "btn btn-primary" %>
     <% end %>
 
