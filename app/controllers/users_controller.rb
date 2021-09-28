@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+
   def index
+    @pagy, @users = pagy(User.all)
   end
 
   def show
-    if logged_in?
-      @user = User.find(params[:id])
-    else
-      redirect_to login_path, alert: '请先登录！'
-    end
   end
 
   def new
@@ -25,6 +24,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: '修改成功！'
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    if @user.admin?
+      @user.destroy
+      redirect_to users_path, notice: '注销成功！'
+    else
+      redirect_to root_path, alert: '无权限！'
+    end
+  end
+
   private
 
   def user_params
@@ -34,5 +53,15 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+    redirect_to root_path, alert: '无权限！' unless current_user?(@user)
+  end
+
+  def logged_in_user
+    store_location
+    redirect_to login_path, alert: '请先登录！' unless logged_in?
   end
 end

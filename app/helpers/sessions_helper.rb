@@ -33,6 +33,10 @@ module SessionsHelper
     end
   end
 
+  def current_user?(user)
+    user && user == current_user
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -41,5 +45,10 @@ module SessionsHelper
     forget(current_user)
     reset_session # 也可以使用 session.delete(:user_id)
     @current_user = nil
+  end
+
+  # 存储后面需要使用的地址
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end
