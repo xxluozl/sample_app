@@ -10,6 +10,9 @@ class SessionsController < ApplicationController
       remember(user) if params[:session][:remember_me] == '1'
       log_in(user)
       redirect_to forwarding_url || user_path(user), notice: '登录成功！'
+    elsif user.nil?
+      flash.now[:alert] = '账户不存在！'
+      render 'new'
     else
       flash.now[:alert] = '邮件或密码错误！'
       render 'new'

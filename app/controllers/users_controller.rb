@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update]
 
   def index
     @pagy, @users = pagy(User.all)
@@ -14,11 +14,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    user = User.new(user_params)
+    if user.save
       reset_session
-      log_in(@user)
-      redirect_to user_path(@user), notice: '注册成功！'
+      log_in(user)
+      redirect_to user_path(user), notice: '注册成功！'
     else
       render 'new'
     end
@@ -36,11 +36,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.admin?
-      @user.destroy
+    user = User.find(params[:id])
+    if current_user.admin?
+      user.destroy
       redirect_to users_path, notice: '注销成功！'
     else
-      redirect_to root_path, alert: '无权限！'
+      redirect_to users_path, alert: '无权限！'
     end
   end
 
@@ -55,7 +56,7 @@ class UsersController < ApplicationController
     )
   end
 
-  def set_user
+  def correct_user
     @user = User.find(params[:id])
     redirect_to root_path, alert: '无权限！' unless current_user?(@user)
   end
