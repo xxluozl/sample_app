@@ -14,11 +14,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
+    @user = User.new(user_params)
+    if @user.save
       reset_session
-      log_in(user)
-      redirect_to user_path(user), notice: '注册成功！'
+      log_in(@user)
+      redirect_to user_path(@user), notice: '注册成功！'
     else
       render 'new'
     end

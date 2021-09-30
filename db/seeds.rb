@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts 'create administrator'
 User.create(
   name: '怪诞奇遇',
   email: 'zhonglinluo@foxmail.com',
@@ -14,6 +15,7 @@ User.create(
   admin: true
 )
 
+puts 'create others users'
 199.times do
   User.create(
     name: FFaker::NameCN.name,

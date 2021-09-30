@@ -31,8 +31,8 @@ gem 'ffaker'
 gem 'pagy'
 
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~> 1.4'
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '~> 0.5'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
