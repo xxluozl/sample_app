@@ -1,6 +1,10 @@
 require "test_helper"
 
 class UsersSignUpTest < ActionDispatch::IntegrationTest
+  def set_up
+    ActionMailer::Base.deliveries.clear
+  end
+
   test "invalid sign up information " do
     get sign_up_path
     assert_no_changes 'User.count' do
@@ -27,7 +31,7 @@ class UsersSignUpTest < ActionDispatch::IntegrationTest
       } }
     end
     follow_redirect! #跟踪页面重定向
-    assert_template 'users/show'
-    assert is_logged_in?
+    assert_template '/'
+    assert !is_logged_in?
   end
 end

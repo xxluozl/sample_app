@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
-  before_save { email.downcase! } #存入数据库前转为小写,使用爆炸方法实现回调，也可以用 self.email = email.downcase 实现回调
+  attr_accessor :remember_token, :activation_token
+  before_create :create_activation_digest
+  before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :email, length: { maximum: 255 }, uniqueness: true, #{ case_sensitive: false }, #唯一且不区分大小写
@@ -28,9 +29,10 @@ class User < ApplicationRecord
     remember_digest
   end
 
-  def authenticate?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
+  def authenticate?(attribute, token)
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def forget
@@ -41,5 +43,26 @@ class User < ApplicationRecord
   # 简单起见，直接使用记忆令牌
   def session_token
     remember_digest || remember
+  end
+
+  def activate_account
+    self.update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  private
+
+  def downcase_email
+    #存入数据库前转为小写,使用爆炸方法实现回调，也可以用 self.email = email.downcase 实现回调
+    email.downcase!
+  end
+
+  # 创建激活令牌和摘要
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 end

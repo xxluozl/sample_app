@@ -12,7 +12,9 @@ User.create(
   email: 'zhonglinluo@foxmail.com',
   password: '123456',
   password_confirmation: '123456',
-  admin: true
+  admin: true,
+  activated: true,
+  activated_at: Time.zone.now
 )
 
 puts 'create others users'
@@ -21,6 +23,8 @@ puts 'create others users'
     name: FFaker::NameCN.name,
     email: FFaker::Internet.email,
     password: '123456',
-    password_confirmation: '123456'
+    password_confirmation: '123456',
+    activated: true,
+    activated_at: Time.zone.now
   )
 end
