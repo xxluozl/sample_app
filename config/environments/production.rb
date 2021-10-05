@@ -62,7 +62,19 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "sample_app_production"
 
-  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'sinablog.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true # Don't care if the mailer can't send.
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.163.com',
+    port: 465, #端口如果为25，则为非ssl协议端口，不会通过ssl加密明文传输
+    domain: 'sinablog.com',
+    user_name: 'zhonglinlaw',
+    password: 'PFFKYCEZVXPSAYHD', #邮箱授权码
+    authentication: :plain, #有:plain、:login、:cram_md5 三种验证方式，这些方法通过安全通道（例如 TLS或SSL）以明文形式传输密码。
+    enable_starttls_auto: true, #检测 SMTP 服务器是否启用了 STARTTLS，如果启用就使用。默认为 true
+    ssl: true #当port为非25端口时，需要启用ssl协议,用于加密明文传输
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
