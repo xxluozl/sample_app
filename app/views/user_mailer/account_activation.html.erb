@@ -1,4 +1,4 @@
-<h1>激活用户</h1>
+<h1>邮箱验证</h1>
 <p>Hi! <%= @user.name %></p>
-<p>欢迎注册，请点击激活按钮激活您的帐户！</p>
-<%= link_to '激活', edit_account_activation_url(@user.activation_token, email: @user.email) %>
+<p>欢迎注册，请点击确认按钮通过验证！</p>
+<%= link_to '确认', edit_account_activation_url(@user.activation_token, email: @user.email) %>

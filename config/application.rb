@@ -21,5 +21,7 @@ module SampleApp
     # 保存到数据库的时间设为本地时间，默认是 :utc
     config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.default_locale = :cn
+    config.i18n.available_locales = %i( cn en )
   end
 end

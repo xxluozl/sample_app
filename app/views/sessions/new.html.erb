@@ -9,10 +9,11 @@
       <%= f.label :remember_me, class: 'checkbox inline' do %>
         <%= f.check_box :remember_me %>
         <span>记住我</span>
+        <%= link_to '忘记密码？', new_password_reset_path, style: 'float: right' %>
       <% end %>
       <%= f.submit "登录", class: "btn btn-primary" %>
     <% end %>
 
-    <p>没有账号? <%= link_to "马上注册!", sign_up_path %></p>
+    <p>没有账号？ <%= link_to "马上注册！", sign_up_path %></p>
   </div>
 </div>

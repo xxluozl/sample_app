@@ -12,14 +12,14 @@ class SessionsController < ApplicationController
         log_in(user)
         redirect_to forwarding_url || user_path(user), notice: '登录成功！'
       else
-        redirect_to login_path, alert: '检测到您未激活账户，请先激活账户！'
+        redirect_to login_path, alert: '检测到您未验证邮箱，请前往验证后登录！'
       end
     elsif user.nil?
       flash.now[:alert] = '账户不存在！'
-      render 'new'
+      render :new
     else
       flash.now[:alert] = '邮件或密码错误！'
-      render 'new'
+      render :new
     end
   end
 

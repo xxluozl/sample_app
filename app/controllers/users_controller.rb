@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to root_path, alert: '账户未激活！' unless @user.activated?
+    redirect_to root_path, alert: '邮箱未验证！' unless @user.activated?
   end
 
   def new
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user.send_activation_email
       redirect_to root_path, notice: '注册成功，请前往注册邮箱确认账户！'
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -57,8 +57,12 @@ class UsersController < ApplicationController
   end
 
   def correct_user
-    @user = User.find(params[:id])
-    redirect_to root_path, alert: '无权限！' unless current_user?(@user)
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      redirect_to root_path
+    elsif !current_user?(@user)
+      redirect_to root_path, alert: '无权限！'
+    end
   end
 
   def logged_in_user
