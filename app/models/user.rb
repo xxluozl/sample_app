@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
+  has_many :microposts, dependent: :destroy
+  default_scope -> { order(created_at: :asc) }
   before_create :create_activation_digest
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }

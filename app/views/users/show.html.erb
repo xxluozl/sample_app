@@ -9,4 +9,13 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h2>全部微博（<%= @user.microposts.count %>）</h2>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+      <%== pagy_bootstrap_nav(@pagy) %>
+    <% end %>
+  </div>
 </div>

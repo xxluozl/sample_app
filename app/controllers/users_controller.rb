@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @pagy, @microposts = pagy(@user.microposts)
     redirect_to root_path, alert: '邮箱未验证！' unless @user.activated?
   end
 
