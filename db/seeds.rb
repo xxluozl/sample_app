@@ -17,14 +17,21 @@ User.create(
   activated_at: Time.zone.now
 )
 
-# puts 'create others users'
-# 199.times do
-#   User.create(
-#     name: FFaker::NameCN.name,
-#     email: FFaker::Internet.email,
-#     password: '123456',
-#     password_confirmation: '123456',
-#     activated: true,
-#     activated_at: Time.zone.now
-#   )
-# end
+puts 'create others users'
+149.times do
+  User.create(
+    name: FFaker::NameCN.name,
+    email: FFaker::Internet.email,
+    password: '123456',
+    password_confirmation: '123456',
+    activated: true,
+    activated_at: Time.zone.now
+  )
+end
+
+puts 'create microposts'
+User.order(activated: :asc).take(10).each do |user|
+  50.times do
+    user.microposts.create(content: FFaker::LoremCN.sentence(10))
+  end
+end

@@ -6,8 +6,11 @@ cn:
       user:
         name: "昵称"
         email: "邮件地址"
+        signature: "个性签名"
         password: "密码"
         password_confirmation: "两次输入的"
+      micropost:
+        content: "内容"
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -21,29 +24,9 @@ cn:
   # 用于 distance_of_time_in_words(), distance_of_time_in_words_to_now(), time_ago_in_words()
   datetime:
     distance_in_words:
-      half_a_minute: "半分钟"
-      less_than_x_seconds:
-        one: "不到1秒"
-        other: "不到%{count}秒"
-      x_seconds:
-        one: "1秒"
-        other: "%{count}秒"
-      less_than_x_minutes:
-        one: "不到1分钟"
-        other: "不到%{count}分钟"
-      x_minutes:
-        one: "1分钟"
-        other: "%{count}e"
-      about_x_hours:
-        one: "大约1小时"
-        other: "大约%{count}小时"
-      x_days:
-        one: "1天"
-        other: "%{count}天"
-    prompts:
-      year: "年"
-      month: "月"
-      day: "日"
-      hour: "小时"
-      minute: "分钟"
-      second: "秒"
+      half_a_minute: "刚刚"
+      less_than_x_seconds: "刚刚"
+      x_seconds: "刚刚"
+      less_than_x_minutes: "刚刚"
+      x_minutes: "%{count}分钟前"
+      about_x_hours: "%{count}小时前"

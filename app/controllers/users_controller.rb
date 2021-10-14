@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:show, :edit, :update]
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @pagy, @users = pagy(User.where(activated: true))
   end
 
   def show
+    @user = User.find_by(id: params[:id])
     @pagy, @microposts = pagy(@user.microposts)
     redirect_to root_path, alert: '邮箱未验证！' unless @user.activated?
   end
@@ -52,6 +53,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :name,
       :email,
+      :signature,
       :password,
       :password_confirmation
     )
@@ -64,10 +66,5 @@ class UsersController < ApplicationController
     elsif !current_user?(@user)
       redirect_to root_path, alert: '无权限！'
     end
-  end
-
-  def logged_in_user
-    store_location
-    redirect_to login_path, alert: '请先登录！' unless logged_in?
   end
 end

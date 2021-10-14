@@ -5,8 +5,9 @@ class User < ApplicationRecord
   before_create :create_activation_digest
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
+  validates :signature, length: { maximum: 48 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validates :email, length: { maximum: 255 }, uniqueness: true, #{ case_sensitive: false }, #唯一且不区分大小写
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, #{ case_sensitive: false }, #唯一且不区分大小写
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 
   has_secure_password
@@ -66,6 +67,11 @@ class User < ApplicationRecord
 
   def reset_token_expired?
     self.reset_send_at < 2.hours.ago
+  end
+
+  #实现动态流原型
+  def feed
+    Micropost.where(user_id: id)
   end
 
   private

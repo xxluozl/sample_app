@@ -3,19 +3,22 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
+      <div>
         <%= gravatar_for(@user) %>
-        <%= @user.name %>
-      </h1>
+        <p id="name"><%= @user.name %></p>
+        <p id="signature"><%= @user.signature %></p>
+      </div>
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.microposts.any? %>
-      <h2>全部微博（<%= @user.microposts.count %>）</h2>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%== pagy_bootstrap_nav(@pagy) %>
-    <% end %>
+    <h2>全部微博（<%= @user.microposts.count %>）</h2>
+    <ol class="microposts">
+      <% if @user.microposts.any? %>
+        <%= render 'microposts/micropost', microposts: @microposts %>
+      <% else %>
+        <li>还没有微博哟。。。</li>
+      <% end %>
+    </ol>
+    <%== pagy_bootstrap_nav(@pagy) %>
   </div>
 </div>

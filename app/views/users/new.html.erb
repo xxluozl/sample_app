@@ -3,8 +3,8 @@
 <h1>注册</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= render 'shared/error_messages' %>
     <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       <%= f.text_field :name, class: 'form-control', placeholder: '昵称' %>
       <%= f.email_field :email, class: 'form-control', placeholder: '邮件地址' %>
       <%= f.password_field :password, class: 'form-control', placeholder: '密码（6个以上字符组成，区分大小写）' %>

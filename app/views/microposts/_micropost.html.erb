@@ -1,8 +1,11 @@
-<li id="micropost-<%= micropost.id %>">
-  <%= link_to gravatar_for(micropost.user, size: 50), user_path(micropost.user) %>
-  <span class="user"><%= link_to micropost.user.name, user_path(micropost.user) %></span>
-  <span class="content"><%= micropost.content %></span>
-  <span class="datetime">
-    <%= date_format(micropost) %>
-  </span>
-</li>
+<% microposts.each do |micropost| %>
+  <li id="micropost-<%= micropost.id %>">
+    <%= link_to gravatar_for(micropost.user, size: 50), user_path(micropost.user) %>
+    <div class="user">
+      <span class="user_name"><%= link_to micropost.user.name, user_path(micropost.user) %></span>
+      <span class="timestamp"><%= date_format(micropost) %></span>
+    </div>
+    <span class="content"><%= micropost.content %></span>
+    <%= link_to '删除', micropost_path(micropost), method: :delete, data: { confirm: '确定删除吗？' } %>
+  </li>
+<% end %>
