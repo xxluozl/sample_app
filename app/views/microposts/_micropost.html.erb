@@ -15,7 +15,7 @@
     </div>
     <span class="content">
       <%= micropost.content %>
-      <%= image_tag micropost.image if micropost.image.attached? %>
+      <%= image_tag micropost.resize_image if micropost.image.attached? %>
     </span>
   </li>
 <% end %>

@@ -279,7 +279,8 @@ input {
 
     img {
       display: block;
-      padding: 5px 0;
+      margin: 10px 5px 10px 0;
+      border-radius: 10px;
     }
   }
 
@@ -332,6 +333,13 @@ aside {
       background-color: #fff;
     }
   }
+}
+
+.show-img {
+  height: 150px;
+  width: auto;
+  border-radius: 10px;
+  margin: 10px 10px 0 0
 }
 
 span.image {

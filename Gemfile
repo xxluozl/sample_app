@@ -29,6 +29,9 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'ffaker'
 gem 'pagy'
+gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
 
 group :development, :test do
   # Use mysql as the database for Active Record
