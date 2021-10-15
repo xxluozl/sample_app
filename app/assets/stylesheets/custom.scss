@@ -249,7 +249,7 @@ input {
   list-style: none;
   padding: 0;
 
-  li {
+  > li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
@@ -296,12 +296,41 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+
+  .dropdown {
+    float: right;
+
+    button {
+      border: none;
+      border-radius: 50%;
+
+      &:active {
+        outline: none;
+      }
+    }
+
+    .dropdown-menu {
+      text-align: center;
+    }
+  }
 }
 
 aside {
   textarea {
     height: 100px;
+    resize: none;
+    overflow: hidden;
     margin-bottom: 5px;
+    border: 2px solid #F0F1F4;
+    background-color: #F0F1F4;
+    border-radius: 10px;
+    padding: 10px;
+
+    &:focus {
+      outline: none;
+      border: 2px solid #EA8011;
+      background-color: #fff;
+    }
   }
 }
 
