@@ -4,9 +4,9 @@
     <%= f.text_area :content, placeholder: "有什么新鲜事想分享给大家？", maxlength: 140 %>
   </div>
   <div class="upload">
-    <%= image_tag "img-upload", alt: "imgUpload", id: "img-upload", width: 22, height: "auto" %>
+    <%= image_tag "img_upload.svg", alt: "imgUpload", id: "img-upload", width: 22, height: "auto" %>
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", class: "file-input", style: "display:none" %>
-    <%= image_tag "video-upload", alt: "videoUpload", id: "video-upload", width: 22, height: "auto", style: "margin-left:20px" %>
+    <%= image_tag "video_upload.svg", alt: "videoUpload", id: "video-upload", width: 22, height: "auto", style: "margin-left:20px" %>
   </div>
   <%= image_tag "", alt: "picture", class: "show-img", style: "display:none" %>
   <%= f.submit "发布", class: "btn btn-primary", disabled: true, style: "margin-top:20px" %>
