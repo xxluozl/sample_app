@@ -335,6 +335,14 @@ aside {
   }
 }
 
+.upload {
+  img {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 .show-img {
   height: 150px;
   width: auto;

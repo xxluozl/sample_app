@@ -3,7 +3,7 @@
   <div class="field">
     <%= f.text_area :content, placeholder: "有什么新鲜事想分享给大家？", maxlength: 140 %>
   </div>
-  <div>
+  <div class="upload">
     <%= image_tag "img-upload", alt: "imgUpload", id: "img-upload", width: 22, height: "auto" %>
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", class: "file-input", style: "display:none" %>
     <%= image_tag "video-upload", alt: "videoUpload", id: "video-upload", width: 22, height: "auto", style: "margin-left:20px" %>
