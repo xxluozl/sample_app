@@ -10,6 +10,6 @@ class Micropost < ApplicationRecord
                     message: "大小5MB以内" }
 
   def resize_image
-    image.variant(resize_to_limit: [250, 250])
+    image.variant(resize_to_limit: [168, 168])
   end
 end

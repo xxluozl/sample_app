@@ -1,16 +1,18 @@
 <% microposts.each do |micropost| %>
   <li id="micropost-<%= micropost.id %>">
     <%= link_to gravatar_for(micropost.user, size: 50), user_path(micropost.user) %>
-    <% if current_user?(micropost.user) %>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu<%= micropost.id %>" data-toggle="dropdown" title="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<%= micropost.id %>">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu<%= micropost.id %>" data-toggle="dropdown" title="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<%= micropost.id %>">
+        <% if current_user?(micropost.user) %>
           <li><%= link_to '删除', micropost_path(micropost), method: :delete, data: { confirm: '确定删除吗？' } %></li>
-        </ul>
-      </div>
-    <% end %>
+        <% else %>
+          <li><%= link_to '屏蔽此条微博', '#', data: { confirm: '确定要屏蔽这条微博吗？' } %></li>
+        <% end %>
+      </ul>
+    </div>
     <div class="user">
       <span class="user_name"><%= link_to micropost.user.name, user_path(micropost.user) %></span>
       <span class="timestamp"><%= date_format(micropost) %></span>
