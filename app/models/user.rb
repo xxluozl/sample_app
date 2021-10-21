@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  has_many :microposts, dependent: :destroy
   default_scope -> { order(created_at: :asc) }
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy #主动关系，我主动关注别人
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy #被动关系，我被别人关注
+  has_many :following, through: :active_relationships, source: :followed #following方法返回关注者数组，并且可以向数组一样增加和删除元素
+  has_many :followers, through: :passive_relationships, source: :follower #followed方法返回粉丝数组，并且可以向数组一样增加和删除元素
   before_create :create_activation_digest
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -72,6 +76,20 @@ class User < ApplicationRecord
   #实现动态流原型
   def feed
     Micropost.where(user_id: id)
+  end
+
+  #关注用户的相关方法
+  def follow(other_user)
+    following << other_user unless self == other_user
+    # active_relationships.create(followed_id: other_user.id) #这种写法会同时查询当前user和关注的user
+  end
+
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  def follow?(other_user)
+    following.include?(other_user)
   end
 
   private

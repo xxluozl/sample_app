@@ -10,8 +10,13 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  resources :users
+  resources :users do
+    member do  #得到形如localhost:3000/users/1/following的地址，也可用collection方法，但是不会包含id,形如localhost:3000/users/following
+      get :following, :followers  #具名路由：following_user_path(id)
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :edit, :create, :update]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end

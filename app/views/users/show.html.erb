@@ -2,12 +2,22 @@
 
 <div class="row">
   <aside class="col-md-4">
+    <% unless current_user?(@user) %>
+      <div id="follow-form">
+        <% if current_user.follow?(@user) %>
+          <%= render 'unfollow' %>
+        <% else %>
+          <%= render 'follow' %>
+        <% end %>
+      </div>
+    <% end %>
     <section class="user_info">
       <div>
         <%= gravatar_for(@user) %>
         <p id="name"><%= @user.name %></p>
-        <p id="signature"><%= @user.signature %></p>
+        <%= render 'shared/stats' %>
       </div>
+      <p id="signature"><%= @user.signature %></p>
     </section>
   </aside>
   <div class="col-md-8">

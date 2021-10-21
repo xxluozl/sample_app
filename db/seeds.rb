@@ -31,7 +31,16 @@ end
 
 puts 'create microposts'
 User.order(activated: :asc).take(10).each do |user|
-  50.times do
+  20.times do
     user.microposts.create(content: FFaker::LoremCN.sentence(10))
   end
+end
+
+puts 'follow users'
+users = User.all
+users[1..20].each do |followed|
+  User.find(1).follow(followed)
+end
+users[1..10].each do |followers|
+  followers.follow(User.find(1))
 end

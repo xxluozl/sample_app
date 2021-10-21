@@ -141,19 +141,49 @@ aside {
     div {
       height: 80px;
 
-      #name {
-        font-size: large;
-        font-weight: bolder;
-        line-height: 65px;
+      p {
+        margin: 0
       }
 
-      #signature {
-        width: 290px;
-        height: auto;
-        color: $gray-light;
-        margin-top: -30px;
-        font-size: x-small;
+      #name {
+        padding-top: 15px;
+        font-size: large;
+        font-weight: bolder;
       }
+
+      .stats {
+        height: 25px;
+
+        a {
+          text-decoration: none;
+          padding-right: 10px;
+          color: $gray-light;
+
+          &:hover {
+            color: #EB7340;
+          }
+
+          &:hover span {
+            color: #EB7340;
+          }
+
+          :first-child {
+            color: $gray-light;
+          }
+
+          :nth-child(2) {
+            color: #000
+          }
+        }
+      }
+    }
+
+    #signature {
+      width: 85%;
+      height: auto;
+      padding: 15px 0 0 18px;
+      color: $gray-light;
+      font-size: x-small;
     }
   }
 
@@ -167,7 +197,7 @@ aside {
     }
 
     span {
-      display: block;
+      //display: block;
       margin-bottom: 3px;
       line-height: 1;
     }
@@ -329,7 +359,7 @@ aside {
 
     &:focus {
       outline: none;
-      border: 2px solid #EA8011;
+      border: 2px solid #FF8200;
       background-color: #fff;
     }
   }
@@ -360,4 +390,59 @@ span.image {
 
 .pagy-bootstrap-nav {
   text-align: center;
+}
+
+.btn-follow {
+  width: 25%;
+  background-color: #FF8200;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  float: right;
+  margin-top: 48px;
+
+  &:hover {
+    color: white;
+    background-color: #FF5900;
+  }
+
+  &:focus {
+    color: white;
+    outline: 0;
+
+    &:active {
+      outline: none;
+      background-color: #FF5900;
+    }
+  }
+}
+
+.btn-followed {
+  position: absolute;
+  width: 25%;
+  background-color: #ccc;
+  color: white;
+  font-weight: bold;
+  border-radius: 30px;
+  right: 0;
+  top: 48px;
+
+  &:hover {
+    color: white;
+  }
+
+  &:focus {
+    color: white;
+    outline: 0;
+
+    &:active {
+      outline: none;
+      background-color: #ccc;
+    }
+  }
+
+  & + .dropdown-menu-right {
+    text-align: center;
+    top: 85px;
+  }
 }

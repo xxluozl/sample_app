@@ -23,5 +23,7 @@ module SampleApp
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :cn
     config.i18n.available_locales = %i( cn en )
+
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

@@ -47,6 +47,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @title = "关注列表"
+    @user = User.find(params[:id])
+    @users = @user.following
+    @pagy, @pagy_users = pagy(@users)
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "粉丝列表"
+    @user = User.find(params[:id])
+    @users = @user.followers
+    @pagy, @pagy_users = pagy(@users)
+    render 'show_follow'
+  end
+
   private
 
   def user_params
