@@ -2,7 +2,7 @@
   <li id="micropost-<%= micropost.id %>">
     <%= link_to gravatar_for(micropost.user, size: 50), user_path(micropost.user) %>
     <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu<%= micropost.id %>" data-toggle="dropdown" title="dropdown" aria-haspopup="true" aria-expanded="true">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu<%= micropost.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<%= micropost.id %>">
